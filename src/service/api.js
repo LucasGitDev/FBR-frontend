@@ -18,4 +18,13 @@ export default class Api {
 
     return resp;
   }
+
+
+  static searchPecas(search) {
+    return this.api.get(`/pecas/search?search=${search}`).then((response) => {
+
+      console.log(response.data);
+      return response.data;
+    });
+  }
 }
