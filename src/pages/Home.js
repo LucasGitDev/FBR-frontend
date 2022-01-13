@@ -6,9 +6,7 @@ function Home() {
   const [pecas, setPecas] = useState([]);
 
   useEffect(() => {
-    Api.get("/pecas").then((response) => {
-      setPecas(response.data);
-    });
+    setPecas(Api.getPecas());
   }, []);
 
   return (
