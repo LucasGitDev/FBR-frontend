@@ -8,7 +8,9 @@ function Home() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    setPecas(Api.getPecas());
+    Api.getPecas().then((response) => {
+      setPecas(response);
+    });
   }, []);
 
   const handleSearch = (e) => {
@@ -21,21 +23,24 @@ function Home() {
     <div className="">
       <header className="" />
       <div>
-        <div className="barra-busca" style={{
+        <div
+          className="barra-busca"
+          style={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
             margin: "10px",
-        }}>
+          }}
+        >
           <TextField
             id="outlined-basic"
             label="Buscar"
             variant="outlined"
             onChange={handleSearch}
             style={{
-                width: "100%",
-                margin: "10px",
+              width: "100%",
+              margin: "10px",
             }}
           />
           <Button
@@ -43,7 +48,8 @@ function Home() {
             color="primary"
             onClick={async (e) => {
               if (search === "") {
-                setPecas(Api.getPecas());
+                let pcs = await Api.getPecas();
+                setPecas(pcs);
               } else {
                 let pecas = await Api.searchPecas(search);
                 setPecas(pecas);
