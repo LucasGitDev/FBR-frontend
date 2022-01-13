@@ -1,31 +1,20 @@
+import React from 'react';
 import './App.css';
-import Api from './service/api';
-import React, { useEffect, useState } from 'react';
-import Item from './components/Peca/Item';
+
+import MyRoutes from './routes'
 
 function App() {
-
-  const [pecas, setPecas] = useState([]);
-
-  useEffect(() => {
-    Api.get('/pecas').then(response => {
-      setPecas(response.data);
-
-    });
-  }, []);
-
   return (
-    <div className="App">
-      <header className=""/>
+    
+    <div>
+
       <div>
-        {
-          pecas.map(peca => {
-            return <Item key={peca.id} peca={peca}/>
-          })
-        }
+        
       </div>
 
+      <MyRoutes/>
     </div>
+
   );
 }
 
