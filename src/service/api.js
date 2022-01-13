@@ -6,25 +6,19 @@ export default class Api {
     baseURL: `http://localhost:3333/`,
   });
 
-  static getPecas(url) {
-    let resp = pecas
-    try {
-      this.api.get('/pecas').then((response) => {
-        resp =  response.data;
-      });
-    } catch (error) {
+  static getPecas() {
+    return this.api.get(`/pecas`).then((response) => {
+      return response.data;
+    }).catch((error) => {
       console.log(error);
-    }
-
-    return resp;
+      return pecas;
+    });
   }
 
 
-  static searchPecas(search) {
-    return this.api.get(`/pecas/search?search=${search}`).then((response) => {
-
-      console.log(response.data);
-      return response.data;
-    });
+  static async searchPecas(search) {
+    const response = await this.api.get(`/pecas/search?search=${search}`);
+    console.log(response.data);
+    return response.data;
   }
 }
