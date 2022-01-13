@@ -1,11 +1,21 @@
 import axios from "axios";
+import pecas from "../assets/pecas_teste";
 
 export default class Api {
   static api = axios.create({
     baseURL: `http://localhost:3333/`,
   });
 
-  static get(url) {
-    return this.api.get(url);
+  static getPecas(url) {
+    let resp = pecas
+    try {
+      this.api.get('/pecas').then((response) => {
+        resp =  response.data;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    return resp;
   }
 }
