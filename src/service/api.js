@@ -1,9 +1,10 @@
 import axios from "axios";
 import pecas from "../assets/pecas_teste";
-
-export default class Api {
+const url = `https://fbr-sys-backend.herokuapp.com` 
+// url = "http://localhost:3333"
+export default class Api { 
   static api = axios.create({
-    baseURL: `http://localhost:3333/`,
+    baseURL: url,
   });
 
   static getPecas() {
@@ -18,7 +19,6 @@ export default class Api {
 
   static async searchPecas(search) {
     const response = await this.api.get(`/pecas/search?search=${search}`);
-    console.log(response.data);
     return response.data;
   }
 }
