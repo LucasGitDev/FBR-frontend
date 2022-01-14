@@ -1,12 +1,10 @@
 import axios from "axios";
 import pecas from "../assets/pecas_teste";
-
-export default class Api {
-
-  url = "https://fbr-sys-backend.herokuapp.com" 
-  // url = "http://localhost:3333"
+const url = `https://fbr-sys-backend.herokuapp.com` 
+// url = "http://localhost:3333"
+export default class Api { 
   static api = axios.create({
-    baseURL: this.url,
+    baseURL: url,
   });
 
   static getPecas() {

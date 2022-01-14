@@ -13,10 +13,18 @@ function Home() {
     });
   }, []);
 
+  const searchGo = async (e) => {
+    if (search === "") {
+      let pcs = await Api.getPecas();
+      setPecas(pcs);
+    } else {
+      let pecas = await Api.searchPecas(search);
+      setPecas(pecas);
+    }
+  }
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
-
-    console.log(search);
   };
 
   return (
@@ -38,6 +46,11 @@ function Home() {
             label="Buscar"
             variant="outlined"
             onChange={handleSearch}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                searchGo();
+              }
+            }}
             style={{
               width: "100%",
               margin: "10px",
@@ -46,15 +59,7 @@ function Home() {
           <Button
             variant="contained"
             color="primary"
-            onClick={async (e) => {
-              if (search === "") {
-                let pcs = await Api.getPecas();
-                setPecas(pcs);
-              } else {
-                let pecas = await Api.searchPecas(search);
-                setPecas(pecas);
-              }
-            }}
+            onClick={searchGo}
           >
             Go!
           </Button>
