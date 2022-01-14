@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes, Router } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
-import Peca from './pages/Peca'
+import Peca from './pages/Peca/Peca'
+import PecaCadastro from './pages/Peca/PecaCadastro'
 
 export default function MyRoutes() {
   
@@ -15,6 +16,7 @@ export default function MyRoutes() {
         <Route path="/" element={<Home />} />
         {/* <Route path='/login' element={<Login />} />
         <Route path="/peca/:id" element={<Peca />} /> */}
+        <Route path="/peca/cadastro/:id" element={<PecaCadastro />} />
       </Routes>
     </BrowserRouter>
 

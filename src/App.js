@@ -23,8 +23,8 @@ function App() {
           <Link underline="hover" color="inherit" href="/">
             Home
           </Link>
-          <Link underline="hover" color="inherit" href="/">
-            Home
+          <Link underline="hover" color="inherit" href="/peca/cadastro/-1">
+            Cadastro
           </Link>
         </Breadcrumbs>
       </div>

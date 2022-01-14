@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Api from "../service/api";
 import Item from "../components/Peca/Item";
 import { TextField, Button } from "@mui/material/";
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
 
 function Home() {
   const [pecas, setPecas] = useState([]);
@@ -61,7 +63,7 @@ function Home() {
             color="primary"
             onClick={searchGo}
           >
-            Go!
+            <SearchOutlinedIcon />
           </Button>
         </div>
 
