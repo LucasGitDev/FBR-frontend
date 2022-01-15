@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Api from "../service/api";
 import Item from "../components/Peca/Item";
-import { TextField, Button } from "@mui/material/";
+import { TextField, Button, Grid } from "@mui/material/";
 
 function Home() {
   const [pecas, setPecas] = useState([]);
@@ -21,7 +21,7 @@ function Home() {
       let pecas = await Api.searchPecas(search);
       setPecas(pecas);
     }
-  }
+  };
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -56,18 +56,21 @@ function Home() {
               margin: "10px",
             }}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={searchGo}
-          >
+          <Button variant="contained" color="primary" onClick={searchGo}>
             Go!
           </Button>
         </div>
 
-        {pecas.map((peca) => {
-          return <Item key={peca.id} peca={peca} />;
-        })}
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {pecas.map((peca) => {
+            return <Item key={peca.id} peca={peca} />;
+          })}
+        </Grid>
       </div>
     </div>
   );

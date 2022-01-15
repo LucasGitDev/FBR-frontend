@@ -1,0 +1,8 @@
+#Carde {
+    background: rgb(165, 165, 165);
+    margin: 10px;
+}
+#ListPeca{
+    display: flex;
+    flex-direction: row;
+}
