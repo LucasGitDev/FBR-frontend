@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Alert } from "@mui/material/";
 import "../../assets/CSS/FormPeca.css";
 import Api from "../../service/api";
+import Home from "../../pages/Home";
 
 const pecaModel = {
   nome: "",
@@ -29,11 +30,11 @@ export const FormPeca = (props) => {
         })
       : pecaModel
   );
-
-  const incompleto = false
+  const [completeCreate, setCompleteCreate] = useState(false);
+  const [incompleto, setIncompleto] = useState(false);
 
   useEffect(() => {
-    peca.data_ultima_remessa = '2020-01-01'
+    peca.data_ultima_remessa = "2020-01-01";
   }, [peca]);
 
   function handleChange(evt) {
@@ -46,18 +47,21 @@ export const FormPeca = (props) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    if(peca !== pecaModel) {
-
-      peca.quantidade = Number(peca.quantidade)
-      peca.quantidadeMinima = Number(peca.quantidadeMinima)
-      peca.valorEntrada = Number(peca.valorEntrada)
-      peca.valorSaida = Number(peca.valorSaida)
-      peca.desconto = Number(peca.desconto)
-
+    setCompleteCreate(false);
+    if (peca !== pecaModel) {
+      peca.quantidade = Number(peca.quantidade);
+      peca.quantidadeMinima = Number(peca.quantidadeMinima);
+      peca.valorEntrada = Number(peca.valorEntrada);
+      peca.valorSaida = Number(peca.valorSaida);
+      peca.desconto = Number(peca.desconto);
 
       if (isCreate) {
         Api.createPeca(peca).then((response) => {
           console.log(response);
+          if (response) {
+            setIncompleto(false)
+            setCompleteCreate(true);
+          }
         });
       } else {
         Api.updatePeca(peca).then((response) => {
@@ -65,13 +69,19 @@ export const FormPeca = (props) => {
         });
       }
     } else {
-      incompleto = true
+      setIncompleto(true);
     }
   }
 
   return (
     <form>
       <div>
+        {completeCreate && (
+          <Alert severity="success">Cadastrado com sucesso</Alert>
+        )}
+        {incompleto && (
+          <Alert severity="error">Preencha todos os campos</Alert>
+        )}
         <div className="contain">
           <TextField
             label={"Nome"}
@@ -162,9 +172,10 @@ export const FormPeca = (props) => {
         />
       </div>
       <div>
-        <Button type="submit" onClick={handleSubmit}>Cadastrar</Button>
+        <Button type="submit" onClick={handleSubmit}>
+          Cadastrar
+        </Button>
         <Button variant={"outlined"}>Reset</Button>
-        {/* <Alert severity="error" hidden={incompleto}>Preencha todos os campos</Alert> */}
       </div>
     </form>
   );

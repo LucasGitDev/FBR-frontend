@@ -1,7 +1,7 @@
 import axios from "axios";
 import pecas from "../assets/pecas_teste";
-// const url = `https://fbr-sys-backend.herokuapp.com`
-const url = `http://localhost:3333`;
+const url = `https://fbr-sys-backend.herokuapp.com`
+// const url = `http://localhost:3333`;
 export default class Api {
   static api = axios.create({
     baseURL: url,
@@ -25,7 +25,6 @@ export default class Api {
   }
 
   static async createPeca(peca) {
-    console.log(peca);
     const response = await this.api.post(`/pecas`, peca);
     return response.data;
   }
